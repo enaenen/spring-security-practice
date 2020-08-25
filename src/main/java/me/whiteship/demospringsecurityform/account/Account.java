@@ -1,13 +1,10 @@
 package me.whiteship.demospringsecurityform.account;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Account {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(unique = true)
     private String username;
@@ -44,5 +41,9 @@ public class Account {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public void encodePassword() {
+        this.password = "{noop}" + this.password;
     }
 }
